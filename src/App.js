@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
+import Login from './Páginas/Login';
+import Cadastro from './Páginas/Cadastro';
+import Extrato from './Páginas/Extrato';
+import Entrada from './Páginas/Entrada';
+import Saida from './Páginas/Saida';
+
+import ContextUsuario from './Contexts/Context';
 
 function App() {
+
+  const [token, setToken] = useState('');
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <ContextUsuario.Provider value={{ setToken, token }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/extrato" element={<Extrato />} />
+          <Route path="/entrada" element={<Entrada />} />
+          <Route path="/saida" element={<Saida />} />
+        </Routes>
+      </BrowserRouter>
+
+    
+    </ContextUsuario.Provider >
   );
 }
 
